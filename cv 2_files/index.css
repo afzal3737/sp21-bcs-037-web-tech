@@ -1,0 +1,49 @@
+body{
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+#header{
+    display: flex;
+background-color: rgb(31, 31, 189);
+
+#profile{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+#About{
+    color: white;
+}
+.innerDiv{
+    margin-left: 10px;
+}
+}
+#name{
+color: white;
+
+}
+#profession{
+    color: white;
+}
+.second{
+    display:flex;
+    gap: 10%;
+}
+.secondFirst{
+    flex:4;
+}
+.secondInner{
+    flex:6;
+}
+.headingClass{
+    font-size: large;
+    font-weight: bold;
+    color: blue;
+}
+.subHeading{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: medium;
+}
