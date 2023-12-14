@@ -12,6 +12,57 @@ const {addFeedback,getFeedbackList} = require('./Models/feedbackoperation');
 
 
 
+// Render the login page
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// Handle login form submission
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  // Implement your login logic here
+  // For simplicity, let's just log the credentials for now
+  console.log('Email:', email);
+  console.log('Password:', password);
+
+  res.send('Login successful');
+});
+
+// Render the register page
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+// Handle register form submission
+app.post('/register', (req, res) => {
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
+
+  // Basic validation checks
+  if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    return res.send('All fields are required.');
+  }
+
+  if (password !== confirmPassword) {
+    return res.send('Passwords do not match.');
+  }
+
+  // Implement your registration logic here
+  // For simplicity, let's just log the registration data for now
+  console.log('First Name:', firstName);
+  console.log('Last Name:', lastName);
+  console.log('Registered Email:', email);
+  console.log('Registered Password:', password);
+
+  // Store the registered user (in-memory for simplicity, you would use a database)
+  registeredUsers.push({ firstName, lastName, email, password });
+
+  // Redirect the user to the login page after successful registration
+  res.redirect('/login');
+});
+
+
+
 
 
 //ejs work
@@ -26,12 +77,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
 // Set the layout file
 app.set('layout', 'layouts/mainlayout'); // The layout file is in the layouts folder
 
  // Define routes
 app.get('/', (req, res) => {
   res.render('HomePage/index', { title: 'HomePage' });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/register', (req, res) => {
+  res.render('register');
 });
 
 // app.get('/about', (req, res) => {
