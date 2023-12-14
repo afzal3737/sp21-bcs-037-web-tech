@@ -1,0 +1,22 @@
+<!-- views/layouts/mainLayout.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Add your stylesheets, scripts, etc. here -->
+<link  rel="stylesheet" href="/common.css"   >
+  <!-- Include the partials -->
+  
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+  <%- body %> <!-- This is where the content of each view will be injected -->
+  
+
+  <!-- Include the partials -->
+  <%- include('../partials/footer') %>
+</body>
+</html>
