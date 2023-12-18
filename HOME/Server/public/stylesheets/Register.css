@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body{
+    display: flex;
+   align-items: center;
+    flex-direction: column;
+    height: 100hv;
+    background: linear-gradient(rgba(0,0,0,0.2) , rgba(0,0,0,0.2) , rgba(0,0,0,0.2))  ,  url("/Images/sky.jpg");
+    background-size: cover;
+}
+
+form{
+    margin-top: 50px;
+    text-align: center;
+
+}
+input{
+    display: block;
+    width: 350px;
+    height: 40px;
+    margin: 20px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    border-bottom:  1px solid black;
+    background: transparent;
+    color: white;
+
+}
+button{
+    width: 350px;
+    height: 40px;
+    background-color: blue;
+    font-size: 20px;
+    border: none;
+    color: white;
+    margin-top: 20px;
+}
+from h1{
+    margin-bottom: 30px;
+}
+::placeholder{
+    color:black;
+}

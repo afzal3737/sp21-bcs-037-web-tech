@@ -8,67 +8,16 @@ const bodyParser = require('body-parser');
 const { error } = require("console");
 const FeedbackModel = require('./Models/FeedbackModel');
 const {addFeedback,getFeedbackList} = require('./Models/feedbackoperation');
+ app.use (express.static("public"));
 
 
 
-
-// Render the login page
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-// Handle login form submission
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-
-  // Implement your login logic here
-  // For simplicity, let's just log the credentials for now
-  console.log('Email:', email);
-  console.log('Password:', password);
-
-  res.send('Login successful');
-});
-
-// Render the register page
-app.get('/register', (req, res) => {
-  res.render('register');
-});
-
-// Handle register form submission
-app.post('/register', (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword } = req.body;
-
-  // Basic validation checks
-  if (!firstName || !lastName || !email || !password || !confirmPassword) {
-    return res.send('All fields are required.');
-  }
-
-  if (password !== confirmPassword) {
-    return res.send('Passwords do not match.');
-  }
-
-  // Implement your registration logic here
-  // For simplicity, let's just log the registration data for now
-  console.log('First Name:', firstName);
-  console.log('Last Name:', lastName);
-  console.log('Registered Email:', email);
-  console.log('Registered Password:', password);
-
-  // Store the registered user (in-memory for simplicity, you would use a database)
-  registeredUsers.push({ firstName, lastName, email, password });
-
-  // Redirect the user to the login page after successful registration
-  res.redirect('/login');
-});
-
-
-
-
-
-//ejs work
+ //ejs work
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
+// Set the layout file
+app.set('layout', 'layouts/mainlayout'); // The layout file is in the layouts folder
 
 // Use express-ejs-layouts middleware
 app.use(expressLayouts);
@@ -78,38 +27,124 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-// Set the layout file
-app.set('layout', 'layouts/mainlayout'); // The layout file is in the layouts folder
 
- // Define routes
+
+
+
+// Define all routes
+//for Homepage
 app.get('/', (req, res) => {
-  res.render('HomePage/index', { title: 'HomePage' });
+  res.render('index', { title: 'Home' });
+});
+
+//Residencies
+app.get("/buy", (req, res) => {
+
+  res.render('partials/Residencies/Buy' , { title: 'Home' });
+});
+app.get("/sale", (req, res) => {
+
+  res.render('partials/Residencies/Sale' , { title: 'Home' });
+});
+app.get("/rent", (req, res) => {
+
+  res.render('partials/Residencies/Rent' , { title: 'Home' });
+});
+
+//Connect
+
+app.get("/contactus", (req, res) => {
+
+  res.render('partials/Connect/ContactUs' , { title: 'Home' });
+});
+app.get("/ourservices", (req, res) => {
+
+  res.render('partials/Connect/OurServices' , { title: 'Home' });
+});
+app.get("/aboutus", (req, res) => {
+
+  res.render('partials/Connect/AboutUs' , { title: 'Home' });
+});
+
+
+
+// Render the login & register page
+app.get("/register", (req, res) => {
+
+  res.render('partials/Login/Register' , { title: 'Home' });
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('partials/Login/Login' , { title: 'Home' });
 });
 
+const {createNewUser} = require("./Models/createUser");
+
+// Handle register form submission
+app.post('/register', async (req, res) => {
+  const { fname, lname, email, password } = req.body;
+
+  // Store the registered user (in-memory for simplicity, you would use a database)
+  await createNewUser(res, fname, lname, email, password);
+
+  // Redirect the user to the login page after successful registration
+  return;
+});
+
+const {loginUser} = require("./Models/loginUser");
+
+// Handle login form submission
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try{
+    const isUser = await loginUser(email, password);
+
+    if(isUser){
+      console.log("Logged In...");
+      res.redirect('/');
+    }else{
+      console.log("User not exists");
+      res.redirect('/login');
+    }
+  }catch(e){
+
+  }
+
+});
+
+// Render the register page
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register' , { title: 'Home' });
 });
 
-// app.get('/about', (req, res) => {
-//   res.render('about', { title: 'AboutUs' });
-// });
+
+
+
+
+
+// app.use(express.static(path.join(__dirname, 'Views')));
+
+
+
+
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'AboutUs' });
+});
 
 
 
 
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // const homepagePath = path.join(__dirname,  'Views', 'HomePage');
 // app.use('/', express.static(homepagePath));
 
-const aboutUsPath = path.join(__dirname,  'Views', 'AboutUs');
-app.use('/aboutus', express.static(aboutUsPath));
+// const aboutUsPath = path.join(__dirname,  'Views', 'AboutUs');
+// app.use('/aboutus', express.static(aboutUsPath));
+
 
 
 

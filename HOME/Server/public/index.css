@@ -33,8 +33,11 @@
 }
 .header{
 
-    background-image: linear-gradient(rgba(0,0,0,0.5) , rgba(0,0,0,0.5) ) ,
-     url("home.jpg");
+
+ background-image: linear-gradient(rgba(0,0,0,0.5) , rgba(0,0,0,0.5) ) ,
+     url("/images/home.jpg");
+
+
     width: 100%;
     height: 100vh;
     background-position: center;
@@ -45,6 +48,7 @@
 .wave{
     position: absolute;
     bottom: 0px;
+   
   
 }
 .middle{
@@ -57,3 +61,30 @@
 .middle h1{
     font-size: 70px;
 }
+
+.pics{
+
+   padding-left: 10%; 
+   padding-right: 10%;
+ 
+  
+}
+
+.middle1{
+
+    padding-left: 4%;
+    padding-right: 4%;
+
+}
+
+.video{
+
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.hh{
+    padding-left: 4%;
+    color: rgb(8, 218, 8);
+}
+
