@@ -115,7 +115,7 @@ app.post('/register', async (req, res) => {
 });
 
 // server.js
-app.post('/calculate', (req, res ) => {
+app.post('/calculator', (req, res ) => {
   const operand1 = parseFloat(req.body.operand1);
   const operand2 = parseFloat(req.body.operand2);
   const operation = req.body.operation;
