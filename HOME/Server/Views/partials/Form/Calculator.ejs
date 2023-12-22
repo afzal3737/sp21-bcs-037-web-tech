@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <br><br><br>
+
+
+    <h1>Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="operand1">Operand 1:</label>
+        <input type="number" name="operand1" required>
+
+        <label for="operand2">Operand 2:</label>
+        <input type="number" name="operand2" required>
+
+        <label for="operation">Operation:</label>
+        <select name="operation" required>
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+        </select>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+
+
+ <h2>Results</h2>
+<table>
+    <tr>
+        <th>Operand 1</th>
+      
+        <th>Operand 2</th>
+        <th>Operation</th>
+        <th>Result</th>
+    </tr>
+    <% if (results.length > 0) { %>
+        <% for (let i = 0; i < results.length; i++) { %>
+            <tr>
+                <td><%= results[i].operand1 %></td>
+                <td><%= results[i].operand2 %></td>
+                <td><%= results[i].operation %></td>
+                <td><%= results[i].result %></td>
+            </tr>
+        <% } %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">No results available</td>
+        </tr>
+    <% } %>
+</table>
+
+    
+
+
+
+
+<br><br><br><br><br>
+
+
+</body>
+</html>
